@@ -1,0 +1,5 @@
+Configure users for systems
+- Checking auth keys
+- Checking password exists
+- Check home directory
+- Check shell preference

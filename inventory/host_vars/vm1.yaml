@@ -1,0 +1,30 @@
+# ansible_ssh_private_key_file: ~/.ssh/id_ed25519
+staging_user: ubuntu
+
+ansible_admin: ansible
+ansible_admin_shell: /bin/bash
+ansible_admin_groups: sudo
+ansible_admin_key: |-
+  ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIDDSr17m0eUvA/ECR063hje0rW5snhOCrLMhTAahlxaX grmelv@SAS-PF4ZTMH0
+ansible_become_password: iotorion123!
+
+user_list :
+  - grant
+  - tivand
+  - grmelv
+  - ansible
+
+disabled_user_list:
+  - ubuntu
+
+group_list:
+  sudo:
+    - ansible
+    - tivand
+    - grmelv
+  testgroup1: 
+    - grant
+    - grmelv
+  testgroup2: 
+    - tivand
+    - ubuntu

@@ -1,0 +1,5 @@
+- name: Configure NVIDIA Drivers
+  include_tasks: initDrivers.yaml
+
+# - name: Configure Docker Installation
+#   include_tasks: initDocker.yaml

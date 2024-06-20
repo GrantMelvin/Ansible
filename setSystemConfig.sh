@@ -1,0 +1,1 @@
+ansible-playbook sysConfig.yaml -i inventory/hosts.yaml -v

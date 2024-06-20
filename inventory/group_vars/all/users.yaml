@@ -1,0 +1,25 @@
+users:
+  - name: grant
+    auth_key: |-
+      ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIDDSr17m0eUvA/ECR063hje0rW5snhOCrLMhTAahlxaX grmelv@SAS-PF4ZTMH0
+    shell: /bin/bash
+  - name: grmelv
+    auth_key: |-
+      ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIDDSr17m0eUvA/ECR063hje0rW5snhOCrLMhTAahlxaX grmelv@SAS-PF4ZTMH0
+    shell: /bin/bash
+  - name: tivand
+    auth_key: ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIAduukk8N/LHs09abAfMSYx0c1bgR0lmvl+Co88dosy0 europe\tivand@SAS-43KNSV3
+    shell: /bin/bash
+  - name: test2
+    auth_key:
+    shell: /bin/bash
+  - name: ubuntu
+    auth_key: |-
+      ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABgQC2NwWFWtFkbbiZdJkEY2/r9gFUxioGYulR/4sgSutXBMf/Csca5D/+D2s0EEHTdrDXDehnEESXVeJd+Ug1WBpRCIboRtN2ewf0lWQgnl0VgMGBOEPODv9hJJ5BrwqzD244g7hV8Eu0xYGQBRk4WXwocGO2a0oofjY2qFsiRqaaS8wAfSQ2qFb/UM5/Sgz7u+VqbruJqTj9Z+2F6rUG5z430uTXTaekWvdGazPGMx27LPBxMrpwlPlzw00297B9NUJlqFQz20JlPCQIpXd9S7NVdXa8HE0WL436fGKoDCMH+S/F6gmmq0ZsOlygWuu/ATvKlWNmWuokqb6ytyJAXTKmtj25+maAPguVmCqN97Auf9haDAaJdEwC05XwazNdcS95rV9cKrq+ihsP4Z+t3b/5zEt2ty17CDnhsMX0FONML8JhN2QxLB0M8laQn6/E5SVVh9yxuoVNqjCzwHGf/xNidDk3gtqP+1VHW8LaS5qQCX5kq8udTrtQgtTNgqs9HZs= ubuntu@ubuntu
+      ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABgQDMqCf/1Bdakt4kNNaOis3mhV1X5YPTGoo9ekz25fVZj4aq1vARQFgQN9UhTIUdsGH+Zm/og+KoQQJGjuSPLQ0K9NmiQhTpWZJ1IMunP+LHDVBe7F1GgrmKC1/45a35IQkWnBGHUBll+Q2kRBQxuDteOCz7zSlVHqaJYMakYNPJJ/gcPQUAI5yhPXPuJ6vdi1nN7PNqG2sOaSfRUA29UvjI39SfxxuekmnB+Re6duVIaEGP12DMlxvmHM0LSzdcmCrO81qOF6YaTLRN6ExV774mklgK2Xrg2WavJz1bkW0Gi2eMhP/ourEiCZCXWDMyru3VlikyoPKqYwNnAX0BLbIT4F4RU8Xd1bPMsAqpq3DmqWFCz9kXmGlnMgtr4lTfaAZWXsmUUvNGUWrpSW6ZnuvqtTQgz1NxPwfeOToMFky+Vzd1SSlmsK69AltOgquDvjAEoaDnjrRCotjyCOuJnFKWsE8vcxZJak4h70dnfCVLcHn3s1l2zau2yNppyYMYeM8= rancher@sasgpuserver01
+      ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIDDSr17m0eUvA/ECR063hje0rW5snhOCrLMhTAahlxaX grmelv@SAS-PF4ZTMH0
+    shell: /bin/bash
+  - name: ansible
+    shell: "/bin/bash"
+    auth_key: |-
+      ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIDDSr17m0eUvA/ECR063hje0rW5snhOCrLMhTAahlxaX grmelv@SAS-PF4ZTMH0

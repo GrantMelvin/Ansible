@@ -1,0 +1,5 @@
+- name: Disabling the given users
+  user:
+    name: "{{item}}"
+    shell: "/sbin/nologin"
+  with_items: "{{disabled_user_list}}"

@@ -1,0 +1,7 @@
+- name: Automated Account Environment
+  hosts: all
+  var_files:
+    - vars/users.yaml
+
+  tasks:
+    - name: 

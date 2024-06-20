@@ -1,0 +1,1 @@
+ansible-playbook all.yaml -i inventory/hosts.yaml

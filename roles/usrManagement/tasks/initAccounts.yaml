@@ -1,0 +1,22 @@
+- name: Configures a users account, shell, and home
+  user:
+    name: "{{item.name}}"
+    shell: "{{item.shell}}"
+    append: yes
+    create_home: yes
+  with_items: "{{releventUsers}}"
+
+- name: Creates groups if they dont exist yet
+  group:
+    name: "{{item}}"
+    state: present
+  with_items: "{{group_list}}"
+
+- name: Adds each user to the appropriate group
+  user:
+    name: "{{item.1}}"
+    groups: "{{item.0.key}}"
+    append: true
+  with_subelements:
+    - "{{ group_list | dict2items }}" # Turns our list of lists into a dictionary
+    - value                           # Allows access to the nested keys' values

@@ -1,0 +1,34 @@
+- name: Installing Nvidia Drivers
+  hosts: remote
+  become: yes
+  tasks:
+    - name: Update apt repo
+      apt:
+        update_cache: yes
+
+    - name: Install pre-req packages
+      apt:
+        name:
+          - build-essential
+          - dkms
+          - ubuntu-drivers-common
+        state: present
+
+    - name: Add NVIDIA PPA
+      apt_repository:
+        repo: ppa:graphics-drivers/ppa
+        state: present
+        update_cache: yes
+
+    - name: Installing NVIDIA Driver
+      apt:
+        name:
+          - nvidia-driver-470
+          - nvidia-utils-470
+        state: present
+
+#    - name: Restart machine
+#      reboot:
+#        msg: "Rebooting to load the new NVIDIA driver"
+#        connect_timeout: 5
+#        reboot_timeout: 600

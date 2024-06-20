@@ -1,0 +1,64 @@
+- name: Account Creation
+  hosts: remote
+  become: yes
+  vars_prompt:
+    - name: username
+      prompt: What username would you like?
+      private: false
+
+    - name: password
+      prompt: What password would you like?
+      private: true
+
+    - name: isSudo
+      prompt: Is this a sudo user? (y/n)
+      private: false
+
+  tasks:
+    - name: Installing python3 for passlib...
+      ansible.builtin.package:
+        name: python3
+        state: present
+
+    - name: Installing pip3 for passlib...
+      ansible.builtin.package:
+        name: python3-pip
+        state: present
+
+    - name: Installing passlib for password hashing...
+      ansible.builtin.package:
+        name: python3-passlib
+        state: present
+
+    - name: Hashing user password...
+      ansible.builtin.shell: |
+        python3 -c "from passlib.hash import sha512_crypt; print(sha512_crypt.hash('{{password}}'))"
+      register: hashPass
+
+    - name: Creating account...
+      ansible.builtin.user:
+        name: "{{username}}"
+        password: "{{hashPass.stdout}}"
+        shell: "/bin/bash"
+        state: present
+
+    - name: Confirming that user is in a bash shell...
+      command: "getent passwd {{username}}"
+      register: user_info
+
+    - name: Creating home directory...
+      file:
+        path: "/home/{{username}}"
+        state: directory
+        owner: "{{username}}"
+        group: "{{username}}"
+        mode: '0755'
+
+    - name: Adding user to sudoers...
+      lineinfile:
+        path: /etc/sudoers
+        state: present
+        regexp: "^{{username}}"
+        line: "{{username}} ALL=(ALL) NOPASSWD:ALL"
+        validate: "visudo -cf %s"
+      when: isSudo == "y"

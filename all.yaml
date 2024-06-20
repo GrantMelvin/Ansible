@@ -1,0 +1,75 @@
+- name: Check if user is able to connect via SSH
+  hosts: localhost
+  tasks:
+    - name: Check if user is able to connect via SSH
+      shell: |
+        if ! ssh -o BatchMode=yes -o ConnectTimeout=5 {{ staging_user }}@{{ remote_host }} exit; then
+          echo "SSH connection failed or user is disabled"
+          exit 1
+        else
+          echo "SSH connection successful"
+        fi
+      register: ssh_check
+      ignore_errors: yes
+      changed_when: false
+      failed_when: false
+
+- name: Creating admin if SSH connection succeeded
+  hosts: remote
+  become: yes
+  remote_user: "{{staging_user}}"
+  ignore_unreachable: yes
+  ignore_errors: yes
+  vars:
+    ssh_check: "{{hostvars['localhost']['ssh_check']}}"
+  tasks:
+    - name: SSH Status
+      debug:
+        msg: "{{ssh_check}}" 
+
+    - name: Configures and Authorizes an admin account
+      user:
+        name: "{{ansible_admin}}"
+        shell: "{{ansible_admin_shell}}"
+        groups: "{{ansible_admin_groups}}"
+        create_home: yes
+        append: yes
+      register: create_user_results
+      when: ssh_check.rc == 0
+
+    - name: Setting passwords
+      command: usermod {{ansible_admin}} -p ""
+      changed_when: false
+
+    - name: Unlock accounts
+      command: usermod -U {{ansible_admin}}
+      changed_when: false
+
+    - name: Set authorized key, removing all the authorized keys already set
+      authorized_key:
+        user: "{{ansible_admin}}"
+        key: "{{ansible_admin_key}}"
+        state: present
+        exclusive: true
+
+    - name: Set variable to hold ansible users existence
+      set_fact:
+        operator: "{{ansible_admin if ssh_check.rc == 0 or create_user_results.changed == true else staging_user}}"
+      when: ssh_check.rc == 0
+
+    - name: Find current admin
+      debug:
+        msg: "Using ansible through account: {{operator}}"
+      when: ssh_check.rc == 0
+
+    - name: Disabling staging account
+      user:
+        name: "{{staging_user}}"
+        shell: "/sbin/nologin"
+
+- name: Run role on remote host
+  become: yes
+  hosts: remote
+  remote_user: "{{ ansible_admin }}"
+  roles:
+    - usrManagement

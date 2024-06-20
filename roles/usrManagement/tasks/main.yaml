@@ -1,0 +1,27 @@
+## TODO: Connect to server with local user
+## - local tasks
+## - check to see if ansible account exists
+## Check if the ansible admin account exists without the ubuntu account
+## Disable ubuntu account here if it has not already been disabled
+## Only want to use ubuntu account to create admin account and then disable it
+# - name: Initial connection
+#   ignore_errors: true
+#   include_tasks: stageAdmin.yaml
+
+# - name: Create Ansible Admin Account
+#   include_tasks: ansibleAdmin.yaml
+
+- name: Configure Accounts
+  include_tasks: initAccounts.yaml
+
+- name: Configure authentication_keys
+  include_tasks: authKeyCheck.yaml
+
+- name: Enables necessary users
+  include_tasks: enableUsers.yaml
+
+# - name: Disables necessary users
+#   include_tasks: disableUsers.yaml
+
+# - name: Configure Password Authentication
+# include_tasks: passwordAuth.yaml

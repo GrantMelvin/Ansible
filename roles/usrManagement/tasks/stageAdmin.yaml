@@ -1,0 +1,4 @@
+- name: Current user
+  debug:
+    msg: "{{staging_user}}"
+

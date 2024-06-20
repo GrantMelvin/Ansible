@@ -1,0 +1,15 @@
+- name: Debug user password status
+  debug:
+    msg: "User {{ item.item.name }} has password set: {{ item.stdout != '!' }}"
+  with_items: "{{ user_password.results }}"
+
+- name: Debug authorized ~/.ssh/authorized_keys
+  debug:
+    msg: 
+    - "{{machine.key}}"
+    - "{{item.name}}"
+    - "{{ machine.key | regex_replace('~', '/home/' ~ item.name) }}"
+  with_items: "{{users}}"
+  when:
+    - "{{userIsRelevent}}"
+    - "{{machineIsDefined}}"

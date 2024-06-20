@@ -1,0 +1,8 @@
+releventUsers: "{{ users | selectattr('name', 'in', user_list) | list }}"
+
+machine: "{{item.machines | selectattr('name', 'equalto', inventory_hostname) | first}}"
+machineIsDefined: machine is defined
+
+itemKeyPath: "{{('~', '/home/' ~ item.name ~ '/.ssh/authorized_keys')}}"
+
+staging_user: ubuntu

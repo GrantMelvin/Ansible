@@ -1,0 +1,5 @@
+- hosts: remote
+  remote_user: "{{ansible_admin}}"
+  become: yes
+  roles:
+    - sysDefaults

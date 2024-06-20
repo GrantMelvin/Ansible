@@ -1,0 +1,5 @@
+sensible defaults for system
+- connect to lldap
+- setup dns zones
+- default users thatll be on every system - me timothy and carlos
+    - group variables for others

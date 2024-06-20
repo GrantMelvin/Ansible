@@ -1,0 +1,55 @@
+- name: Update apt repo
+  apt:
+    update_cache: yes
+
+- name: Install pre-req packages
+  apt:
+    name:
+      - build-essential
+      - dkms
+      - ubuntu-drivers-common
+      - software-properties-common
+    state: present
+
+- name: Add NVIDIA PPA
+  apt_repository:
+    repo: ppa:graphics-drivers/ppa
+    state: present
+    update_cache: yes
+
+- name: Update apt cache after adding NVIDIA PPA
+  apt:
+    update_cache: yes
+
+- name: Ensure the correct NVIDIA driver is installed
+  apt:
+    name:
+      - nvidia-driver-460
+      - nvidia-utils-460
+    state: present
+  register: nvidia_driver_install
+
+- name: Debug the nvidia_driver_install variable
+  debug:
+    var: nvidia_driver_install
+
+- name: Reboot the machine if the NVIDIA driver was installed or updated
+  reboot:
+  when: nvidia_driver_install.changed
+
+- name: Ensure the NVIDIA driver is loaded
+  shell: lsmod | grep nvidia
+  register: nvidia_driver_loaded
+  failed_when: nvidia_driver_loaded.rc != 0
+  retries: 5
+  delay: 5
+  until: nvidia_driver_loaded.rc == 0
+
+- name: Verify NVIDIA driver installation
+  shell: nvidia-smi
+  register: nvidia_smi_output
+  failed_when: nvidia_smi_output.rc != 0
+
+- name: Display NVIDIA driver information
+  debug:
+    msg: "{{ nvidia_smi_output.stdout }}"

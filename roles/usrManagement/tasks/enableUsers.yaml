@@ -1,0 +1,9 @@
+- name: Setting passwords
+  command: usermod {{item.name}} -p ""
+  changed_when: false
+  with_items: "{{releventUsers}}"
+
+- name: Unlock accounts
+  command: usermod -U {{item.name}}
+  changed_when: false
+  with_items: "{{releventUsers}}"

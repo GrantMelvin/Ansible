@@ -1,0 +1,36 @@
+# Need to create an ansible_admin that is not impacted by this
+- name: Set authorized key, removing all the authorized keys already set
+  authorized_key:
+    user: "{{item.name}}"
+    key: "{{item.auth_key}}"
+    state: present
+    exclusive: true
+  with_items: "{{releventUsers}}"
+
+# - name: Check if auth keys exists
+#   stat:
+#     path: "{{itemKeyPath}}"
+#   register: key_file_status
+#   with_items: "{{releventUsers}}"
+
+
+# - name: Check auth keys status
+#   authorized_key:
+#     user: "{{item.name}}"
+#     state: present
+#     key: "{{itemKeyPath}}"
+#   register: auth_keys
+#   with_items: "{{key_file_status.results.item}}"
+#   when:
+#     - (item.stat.exists | default(false))
+#     - "{{userIsRelevent}}"
+
+# - name: Record missing auth keys
+#   set_fact:
+#     missing_keys: "{{missing_keys | default([]) + [{ 'user': item.item.name, 'machine': inventory_hostname}]}}"
+#   when: not (item.stat.exists | default(false))
+#   with_items: "{{key_file_status.results}}"
+
+# - name: Debug missing auth keys
+#   debug:
+#     msg: "Missing keys: {{missing_keys}}"

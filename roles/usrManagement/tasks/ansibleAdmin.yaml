@@ -1,0 +1,45 @@
+- name: Checking if admin exists
+  shell: id -u "{{ansible_admin}}"
+  register: admin_account_exist
+  become_method: sudo
+  become_user: root
+  ignore_errors: true
+  become: yes
+  
+- name: Configures and Authorizes an admin account
+  user:
+    name: "{{ansible_admin}}"
+    shell: "{{ansible_admin_shell}}"
+    groups: "{{ansible_admin_groups}}"
+    create_home: yes
+    append: yes
+  register: create_user_results
+  when: admin_account_exist.rc != 0
+
+- name: Enable users
+  include_tasks: enableUsers.yaml
+  vars:
+    releventUsers:
+    - name: "{{ansible_admin}}" 
+
+- name: Disable staging account
+  include_tasks: disbableUsers.yaml
+  vars:
+    disabled_user_list:
+      - ubuntu
+
+- name: Adding the auth key to the admin account
+  include_tasks: authKeyCheck.yaml
+  vars:
+    releventUsers:
+      - name: "{{ansible_admin}}" 
+        auth_key: "{{ansible_admin_key}}"
+
+- name: Set variable to hold ansible users existence
+  set_fact:
+    operator: "{{ansible_admin if admin_account_exist.rc == 0 or create_user_results.changed == true else staging_user}}"
+
+- name: Find current admin
+  debug:
+    msg: "Using ansible through account: {{operator}}"
+

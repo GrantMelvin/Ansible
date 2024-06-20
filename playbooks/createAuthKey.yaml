@@ -1,0 +1,34 @@
+- name: Add an authorized key
+  hosts: remote
+  become: yes
+  vars_prompt:
+    - name: "username"
+      prompt: "Enter your username"
+      private: no
+
+    - name: "ssh_key"
+      prompt: "Enter your public ssh keyssh"
+      private: no
+
+  tasks:
+    - name: Make sure that .ssh exists
+      file:
+        path: /home/{{username}}/.ssh
+        state: directory
+        owner: "{{username}}"
+        group: "{{username}}"
+        mode: '0700'
+
+    - name: Add the auth key
+      authorized_key:
+        user: "{{username}}"
+        key: "{{ssh_key}}"
+        state: present
+        path: /home/{{username}}/.ssh/authorized_keys
+
+    - name: Set permissions for the authorized_keys file
+      file:
+        path: /home/{{username}}/.ssh/authorized_keys
+        owner: "{{username}}"
+        group: "{{username}}"
+        mode: '0600'
