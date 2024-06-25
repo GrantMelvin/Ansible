@@ -23,3 +23,13 @@ users:
     shell: "/bin/bash"
     auth_key: |-
       ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIDDSr17m0eUvA/ECR063hje0rW5snhOCrLMhTAahlxaX grmelv@SAS-PF4ZTMH0
+  - name: dazari
+    auth_key: |-
+      ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIDDSr17m0eUvA/ECR063hje0rW5snhOCrLMhTAahlxaX grmelv@SAS-PF4ZTMH0
+    shell: /bin/bash
+  - name: sbrcrs
+    auth_key: |-
+      ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIDDSr17m0eUvA/ECR063hje0rW5snhOCrLMhTAahlxaX grmelv@SAS-PF4ZTMH0
+    shell: /bin/bash
+  
+  

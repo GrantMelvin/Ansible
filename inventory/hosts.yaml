@@ -3,8 +3,14 @@ bastion:
     sasgpuserver01:
       ansible_host: 192.168.155.156
       ansible_ssh_private_key: ~/.ssh/id_rsa
+    iotharvester01:
+      ansible_host: 192.168.155.76
+      ansible_ssh_private_key: ~/.ssh/id_ed25519
 remote:
   hosts:
     vm1:
       ansible_host: 10.52.2.44
       ansible_ssh_private_key_file: ~/.ssh/id_rsa
+    iotvm01:
+      ansible_host: 10.52.0.83
+      ansible_ssh_private_key_file: ~/.ssh/id_ed25519

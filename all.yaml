@@ -3,7 +3,7 @@
   tasks:
     - name: Check if user is able to connect via SSH
       shell: |
-        if ! ssh -o BatchMode=yes -o ConnectTimeout=5 {{ staging_user }}@{{ remote_host }} exit; then
+        if ! ssh -o BatchMode=yes -o ConnectTimeout=5 {{ staging_user }}@{{ target_host }} exit; then
           echo "SSH connection failed or user is disabled"
           exit 1
         else
@@ -15,7 +15,7 @@
       failed_when: false
 
 - name: Creating admin if SSH connection succeeded
-  hosts: remote
+  hosts: iotvm01
   become: yes
   remote_user: "{{staging_user}}"
   ignore_unreachable: yes
@@ -69,7 +69,7 @@
 
 - name: Run role on remote host
   become: yes
-  hosts: remote
+  hosts: iotvm01
   remote_user: "{{ ansible_admin }}"
   roles:
     - usrManagement

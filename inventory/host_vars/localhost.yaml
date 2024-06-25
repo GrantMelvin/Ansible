@@ -1,2 +1,2 @@
-remote_host: vm1
+target_host: iotvm01
 staging_user: ubuntu

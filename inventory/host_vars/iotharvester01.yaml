@@ -1,0 +1,7 @@
+ansible_host: 192.168.155.76
+ansible_user: rancher
+ansible_ssh_private_key: ~/.ssh/id_ed25519
+
+groups:
+  sudo:
+    - rancher

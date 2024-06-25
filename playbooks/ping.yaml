@@ -1,5 +1,6 @@
 - name: Test connectivity
-  hosts: remote
+  hosts: iotvm01
+  remote_user: "ubuntu"
   tasks:
     - name: Ping remote server
       ping:
