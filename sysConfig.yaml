@@ -1,4 +1,4 @@
-- hosts: remote
+- hosts: iotvm01
   remote_user: "{{ansible_admin}}"
   become: yes
   roles:

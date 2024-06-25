@@ -12,5 +12,5 @@ remote:
       ansible_host: 10.52.2.44
       ansible_ssh_private_key_file: ~/.ssh/id_rsa
     iotvm01:
-      ansible_host: 10.52.0.83
+      ansible_host: 10.52.0.89
       ansible_ssh_private_key_file: ~/.ssh/id_ed25519

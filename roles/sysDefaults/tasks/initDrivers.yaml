@@ -29,9 +29,9 @@
     state: present
   register: nvidia_driver_install
 
-- name: Debug the nvidia_driver_install variable
-  debug:
-    var: nvidia_driver_install
+# - name: Debug the nvidia_driver_install variable
+#   debug:
+#     var: nvidia_driver_install
 
 - name: Reboot the machine if the NVIDIA driver was installed or updated
   reboot:
