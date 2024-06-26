@@ -1,0 +1,1 @@
+ansible-playbook sysReset.yaml -i inventory/hosts.yaml 

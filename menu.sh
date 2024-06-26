@@ -15,11 +15,11 @@ if [ "$option" == "1" ]; then
 elif [ "$option" == "2" ]; then
 	ansible-playbook -i ./inventory/hosts.yaml ./playbooks/updateDrivers.yaml
 elif [ "$option" == "3" ]; then
-	ansible-playbook -i ./inventory/hosts.yaml ./playbooks/ping.yaml -vvv
+	ansible-playbook -i ./inventory/hosts.yaml ./playbooks/ping.yaml
 elif [ "$option" == "4" ]; then
 	ansible-playbook -i ./inventory/hosts.yaml ./playbooks/createAuthKey.yaml
 elif [ "$option" == "5" ]; then
 	ansible-playbook -i ./inventory/hosts.yaml ./playbooks/setUsers.yaml
 else
-	echo "ok"
+	echo "Incorrect option"
 fi

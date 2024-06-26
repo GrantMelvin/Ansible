@@ -1,0 +1,4 @@
+Reset host machines
+ssh into them
+edit /etc/ssh/sshd_config to AllowTCPForwarding yes
+sudo systemctl restart sshd 

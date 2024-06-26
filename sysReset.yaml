@@ -1,0 +1,5 @@
+- hosts: iotharvester01
+  remote_user: "{{ansible_user}}"
+  become: yes
+  roles:
+    - sysReset

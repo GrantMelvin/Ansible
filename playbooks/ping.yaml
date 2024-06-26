@@ -1,6 +1,6 @@
 - name: Test connectivity
-  hosts: iotvm01
-  remote_user: "ubuntu"
+  hosts: iotharvester01
+  remote_user: "{{ansible_admin}}"
   tasks:
     - name: Ping remote server
       ping:

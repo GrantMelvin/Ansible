@@ -1,0 +1,5 @@
+# - name: Restart Machine(s)
+#   include_tasks: restart.yaml
+
+- name: Get Python interpreter
+  include_tasks: getPython.yaml

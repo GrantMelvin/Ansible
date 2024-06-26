@@ -6,11 +6,20 @@ bastion:
     iotharvester01:
       ansible_host: 192.168.155.76
       ansible_ssh_private_key: ~/.ssh/id_ed25519
+      ansible_python_interpreter: /usr/bin/python3
 remote:
   hosts:
     vm1:
-      ansible_host: 10.52.2.44
+      ansible_host: 10.52.2.70
       ansible_ssh_private_key_file: ~/.ssh/id_rsa
     iotvm01:
-      ansible_host: 10.52.0.89
+      ansible_host: 10.52.0.12
       ansible_ssh_private_key_file: ~/.ssh/id_ed25519
+
+sasgpuProxyJump:
+  hosts:
+    vm1:
+
+iotharvProxyJump:
+  hosts:
+    iotvm01:
